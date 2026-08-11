@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to The System</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            background-color: antiquewhite;
+        }
+        main{
+            background-color: rgb(133, 133, 133);
+            border: 2px dotted black;
+            border-radius: 10px;
+            height: 75%;
+            width: 75%;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        main h1{
+            font-family: monospace;
+            font-size: 3rem;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            cursor: default;
+        }
+        main div{
+            background-color: slategrey;
+            padding: 20px;
+            width: 80%;
+            height: 100%;
+            border: 1px dashed black;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        main div label{
+            font-family: Helvetica, Arial;
+            font-size: 1.5rem
+        }
+        main div input{
+            height: 30px;
+            width: 80%;
+            margin-left: auto;
+        }
+        main div button{
+            margin-top: 20px;
+            width: 25%;
+            align-self: center;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 5px;
+            background-color: lightblue;
+            cursor: pointer;
+        }
+        main div button:hover{
+            background-color: lightsteelblue;
+        }
+        main div a{
+            margin-top: auto;
+            align-self: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Log-in</h1>
+        <div>
+            <label>Username:</label><br>
+            <input id="username">
+            <br>
+            <label>Password:</label><br>
+            <input type="password" id="password">
+            <button onclick="submit()">SUBMIT</button>
+            <a>Forgot password?</a>
+        </div>
+    </main>
+    <script>
+        async function load(file){
+            const response = await fetch(file);
+
+            const data = await response.json();
+            return data;
+        }
+
+        async function submit(){
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            /*const data = await load("../data/users.json");
+
+            if(data[username] === password){
+                sessionStorage.setItem("username", username);
+                window.location.replace("index.html");
+            }*/
+
+            
+            const response = await fetch('http://localhost:3000/login.html', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({username: username, password: password})
+            })
+            const status = await response.json()
+            if(status.status === "right"){
+                sessionStorage.setItem("username", username);
+                window.location.replace("index.html");
+            }
+            else{
+                window.alert("Username or password incorrect.");
+            }
+        }
+    </script>
+</body>
+</html>
