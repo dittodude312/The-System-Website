@@ -12,6 +12,9 @@ header{
     padding: 5px;
     border-bottom: 5px solid black;
 }
+header h1{
+    margin-left: 25px;
+}
 
 nav{
     display: flex;
@@ -43,13 +46,11 @@ nav #logo{
     flex-grow: 0;
     background-color: white;
     cursor: default;
+    border: 1px solid black;
 }
 
 main{
     margin: 10px;
-}
-#welcome{
-    cursor: default;
 }
 .container{
     background-color: ghostwhite;
@@ -70,4 +71,43 @@ main{
     &:hover{
         color: hsl(240, 80%, 69%);
     }
+}
+.inputContainer{
+    background-color: bisque;
+    padding: 10px;
+    border: 2px solid black;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.inputContainer input{
+    flex-grow: 1;
+    margin-left: 10px;
+    height: 30px;
+}
+.inputContainer button{
+    background-color: beige;
+    height: 30px;
+    border: 1px solid;
+    cursor: pointer;
+    &:hover{
+        background-color: hsl(60, 56%, 95%);
+    }
+    &:active{
+        background-color: hsl(60, 56%, 100%);
+    }
+}
+table{
+    width: 100%;
+    border: 1px dashed;
+    background-color: black;
+}
+th{
+    background-color: hsl(159, 100%, 95%);
+    padding: 10px;
+}
+td{
+    background-color: aliceblue;
+    padding: 6px;
+    height: 20px;
 }

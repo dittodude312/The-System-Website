@@ -1,21 +1,14 @@
-const entry = document.getElementById("entry");
-const output = document.getElementById("output");
-const message = document.getElementById("message");
-
-const changeGradeButton = document.createElement("button");
-changeGradeButton.textContent = "Change Grade";
-changeGradeButton.id = "changeGradeBtn";
-changeGradeButton.onclick = changeGrade;
-
-
-entry.addEventListener("keypress", (event) => {
+document.getElementById("entry").addEventListener("keypress", (event) => {
     if(event.key === "Enter"){
         fetchGrades();
     }
 })
 
+
 async function fetchGrades(){
-    const name = entry.value.trimEnd();
+    const name = document.getElementById("entry").value.trimEnd();
+    const message = document.getElementById("message");
+    const output = document.getElementById("output");
 
     // Empty string
     if(name == ""){
@@ -49,8 +42,11 @@ async function fetchGrades(){
     output.innerHTML = `<h3 id='studentTag'>Student ${tmp[0] + " " + tmp[1]}</h3>`;
     const table = makeTable(gradeData);
     output.append(table);
-
-
+    
+    const changeGradeButton = document.createElement("button");
+    changeGradeButton.textContent = "Change Grade";
+    changeGradeButton.id = "changeGradeBtn";
+    changeGradeButton.onclick = changeGrade;
     output.append(changeGradeButton);
 }
 
@@ -82,6 +78,7 @@ function resetOutput(){
 
 
 function changeGrade(){
+    const changeGradeButton = document.getElementById("changeGradeBtn");
     document.querySelectorAll(".gradeEntry input").forEach(element => {
         element.removeAttribute("disabled");
     });
@@ -89,7 +86,9 @@ function changeGrade(){
     changeGradeButton.onclick = submitGrade;
 }
 
+
 function submitGrade(){
+    const changeGradeButton = document.getElementById("changeGradeBtn");
     let name = document.getElementById("studentTag").textContent.slice(8);
     name = name.slice(0, name.indexOf(" ")) + name.slice(name.indexOf(" ") + 1);
 

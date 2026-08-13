@@ -17,7 +17,7 @@ router.post("/login.html", async (req, res) => {
     const body = req.body;
 
     if(data[body.username] != body.password){
-        res.json({status: "wrong"})
+        res.send({status: "wrong"})
     }
     else{
         res.send({status: "right"})
@@ -34,6 +34,17 @@ router.get("/index.html", (req, res) => {
 
 router.get("/grades.html", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "views", "grades.html"));
+})
+
+router.get("/testscores.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "views", "testscores.html"));
+})
+
+
+
+
+router.get("/doodpool.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "views", "doodpool.html"));
 })
 
 

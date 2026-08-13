@@ -3,49 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Grades</title>
+    <title>View Grades</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="../public/css/style.css">
     <style>
-        #nameInput{
-            background-color: bisque;
-            padding: 10px;
-            border: 2px solid black;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        #nameInput input{
-            flex-grow: 1;
-            margin-left: 10px;
-            height: 30px;
-        }
-        #nameInput button{
-            background-color: beige;
-            height: 30px;
-            border: 1px solid;
-            cursor: pointer;
-            &:hover{
-                background-color: hsl(60, 56%, 95%);
-            }
-            &:active{
-                background-color: hsl(60, 56%, 100%);
-            }
-        }
-        table{
-            width: 100%;
-            border: 1px dashed;
-            background-color: black;
-        }
-        th{
-            background-color: hsl(159, 100%, 95%);
-            padding: 10px;
-        }
-        td{
-            background-color: aliceblue;
-            padding: 6px;
-            height: 20px;
-        }
         #changeGradeBtn{
             display: block;
             margin: auto;
@@ -94,7 +55,7 @@
     </nav>
     <main>
         <h2>View student grades</h2>
-        <div id="nameInput">
+        <div id="nameInput" class="inputContainer">
             <label>Student Name:</label>
             <input id="entry">
             <button onclick="fetchGrades()">Enter</button>
@@ -109,6 +70,7 @@
     <footer>
         <h4>footer</h4>
     </footer>
+    <script src="scripts/load.js"></script>
     <script src="scripts/grades.js"></script>
 </body>
 </html>

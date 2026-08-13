@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Test-Scores</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <style>
+        .scorePanel{
+            background-color: hsl(55, 66%, 83%);
+            flex-grow: 1;
+            flex-basis: 33%;
+            padding: 10px;
+            border: 1px solid black;
+            min-height: 100px;
+            cursor: pointer;
+            transition: border-radius 0.25s;
+            text-decoration: none;
+            &:hover{
+                background-color: hsl(55, 66%, 88%);
+                border-radius: 10px;
+                color: hsl(240, 80%, 69%);
+                & h4{
+                    text-decoration: underline;
+                }
+                & p{
+                    color: black;
+                }
+            }
+        }
+        .scorePanel h4{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Test Scores</h1>
+    </header>
+    <nav>
+        <ul>
+            <li id="logo"><img src="../graphics/logo.png" alt="logo" width="40px"></li>
+            <a href="index.html"><li>Home</li></a>
+            <a><li>Profile</li></a>
+            <a><li>Help</li></a>
+        </ul>
+    </nav>
+    <main>
+        <h2>View student test scores</h2>
+        <div id="yearSelect" class="inputContainer">
+            <label>School Year:</label>
+            <input id="entry" type="number" value="2026">
+            <button onclick="testScores()">Enter</button>
+        </div>
+        <hr>
+        <div class="container" id="output">
+            <h3>No data</h3>
+            Enter year to view test scores.
+        </div>
+        <h3 style="text-align: center;" id="message">Waiting</h3>
+    </main>
+    <footer>
+        <h4>footer</h4>
+    </footer>
+    <script src="scripts/load.js"></script>
+    <script src="scripts/testscores.js"></script>
+</body>
+</html>

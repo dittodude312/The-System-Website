@@ -32,7 +32,7 @@
             font-family: monospace;
             font-size: 3rem;
             margin-top: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             cursor: default;
         }
         main div{
@@ -44,6 +44,7 @@
             border-radius: 15px;
             display: flex;
             flex-direction: column;
+            margin-bottom: 20px;
         }
         main div label{
             font-family: Helvetica, Arial;
@@ -88,6 +89,17 @@
         </div>
     </main>
     <script>
+        document.getElementById("username").addEventListener("keypress", (event) => {
+            if(event.key === "Enter"){
+                document.getElementById("password").focus();
+            }
+        })
+        document.getElementById("password").addEventListener("keypress", (event) => {
+            if(event.key === "Enter"){
+                submit();
+            }
+        })
+
         async function load(file){
             const response = await fetch(file);
 
@@ -112,8 +124,8 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({username: username, password: password})
             })
-            const status = await response.json()
-            if(status.status === "right"){
+            const data = await response.json();
+            if(data.status === "right"){
                 sessionStorage.setItem("username", username);
                 window.location.replace("index.html");
             }
