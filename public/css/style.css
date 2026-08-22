@@ -85,6 +85,12 @@ main{
     margin-left: 10px;
     height: 30px;
 }
+.inputContainer select{
+    flex-grow: 1;
+    margin-left: 10px;
+    height: 30px;
+    cursor: pointer;
+}
 .inputContainer button{
     background-color: beige;
     height: 30px;
@@ -110,4 +116,11 @@ td{
     background-color: aliceblue;
     padding: 6px;
     height: 20px;
+}
+
+footer{
+    background-color: hsl(0, 1%, 77%);
+    margin: 0;
+    padding: 3px;
+    border-top: 1px dotted;
 }

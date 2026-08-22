@@ -40,6 +40,10 @@ router.get("/testscores.html", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "views", "testscores.html"));
 })
 
+router.get("/supplies.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "views", "supplies.html"));
+})
+
 
 
 

@@ -28,6 +28,7 @@ app.use("/data", require("./../routes/data"))
 // 404
 app.get("/*e", (req, res, next) => {
     const filePath = req.path;
+    const resource = req.path.slice(filePath.lastIndexOf("/"));
     const extension = filePath.includes(".") ? filePath.slice(filePath.lastIndexOf(".")) : ".";
 
     res.status(404);
@@ -37,6 +38,9 @@ app.get("/*e", (req, res, next) => {
             break;
         case ".css":
             res.send(null);
+            break;
+        case ".png":
+            res.sendFile(path.join(__dirname, "..", "public", "graphics", "doodpool.png"));
             break;
         case ".html":
             res.sendFile(path.join(__dirname, "..", "views", "404.html"));

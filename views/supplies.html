@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplies</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Supplies</h1>
+    </header>
+    <nav>
+        <ul>
+            <li id="logo"><img src="../graphics/logo.png" alt="logo" width="40px"></li>
+            <a href="index.html"><li>Home</li></a>
+            <a><li>Profile</li></a>
+            <a><li>Help</li></a>
+        </ul>
+    </nav>
+    <main>
+        <h2>View supply inventory</h2>
+        <div class="container" id="tableContainer">
+            <h3>Current Supply Inventory</h3>
+        </div>
+        <hr>
+        <h2>Request supplies</h2>
+        <div class="inputContainer">
+            <label>Request Data:</label>
+            <select id="selection">
+            </select>
+            <input id="quantity" type="number">
+            <button onclick="submitRequest()">Enter</button>
+        </div>
+        <h3 style="text-align: center;" id="message">Waiting</h3>
+    </main>
+    <footer>
+        <h4>footer</h4>
+    </footer>
+    <script src="scripts/load.js"></script>
+    <script src="scripts/supplies.js"></script>
+</body>
+</html>

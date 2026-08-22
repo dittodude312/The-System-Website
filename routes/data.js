@@ -12,4 +12,11 @@ router.put("/grades/:name", (req, res) => {
     res.send("done");
 })
 
+router.post("/supplies/requests.csv", (req, res) => {
+    const body = req.body;
+    const line = `\n${body.username},${body.supply},${body.quantity}`;
+    fs.appendFile(path.join(__dirname, "..", "data", "supplies", "requests.csv"), line);
+    res.send("Request was recieved.");
+})
+
 module.exports = router;
