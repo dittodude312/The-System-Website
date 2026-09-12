@@ -1,8 +1,14 @@
+import { makeTable, URL } from "./utilities.js"
+
+
 document.getElementById("entry").addEventListener("keypress", event => {
     if(event.key === "Enter"){
         testScores();
     }
 })
+
+
+document.getElementById("enter").addEventListener("click", testScores)
 
 
 function testScores(){
@@ -50,8 +56,9 @@ function testScores(){
             panelContainer.append(tmp);
         }
         output.append(panelContainer);
-        resolve(1);
+        resolve(0);
     }).then(value => addListeners());
+    message.textContent = "Waiting";
 
     output.append(document.createElement("hr"));
 }
@@ -83,7 +90,8 @@ function addListeners(){
             if(document.getElementById("scoreTable") != null){
                 output.removeChild(document.getElementById("scoreTable"));
             }
-            output.append(makeTable(scoreData));
+            output.append(makeTable(scoreData, "scoreTable"));
+            document.getElementById("message").textContent = "Scores found";
         })
     })
 }
@@ -95,7 +103,7 @@ async function fetchScores(id){
     const year = id.slice(0, 4);
     const type = id.slice(4);
 
-    const response = await fetch(`http://localhost:3000/data/testScores/${year}/${type}.csv`);
+    const response = await fetch(`http://${URL}/data/testScores/${year}/${type}.csv`);
     
     if(response.status === 404){
         return 404;
@@ -105,27 +113,6 @@ async function fetchScores(id){
         data.push(row.split(","));
     }
     return data;
-}
-
-
-function makeTable(data){
-    const table = document.createElement("table");
-
-    for(let layerIndex = 0; layerIndex < data.length; layerIndex++){
-        let row = document.createElement("tr");
-        
-        for(let element of data[layerIndex]){
-            if(layerIndex === 0){
-                row.innerHTML += `<th>${element}</th>`;
-            }
-            else{
-                row.innerHTML += `<td>${element}</td>`;
-            }
-        }
-        table.append(row);
-    }
-    table.id = "scoreTable";
-    return table;
 }
 
 

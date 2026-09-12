@@ -1,8 +1,14 @@
+import { makeTable, URL } from "./utilities.js"
+
+
 document.getElementById("entry").addEventListener("keypress", (event) => {
     if(event.key === "Enter"){
         fetchGrades();
     }
 })
+
+
+document.getElementById("enter").addEventListener("click", fetchGrades)
 
 
 async function fetchGrades(){
@@ -30,45 +36,42 @@ async function fetchGrades(){
     });
 
     // Not found
-    const gradeData = await fecthData(tmp[0] + tmp[1]);
-    if(gradeData === 404){
+    const gradeDataJSON = await fetchData(tmp[0] + tmp[1]);
+    if(gradeDataJSON === 404){
         message.textContent = "Student could not be found.";
         resetOutput();
         return null;
+    }
+
+    // Make into 2d list
+    const gradeDataArray = [["Subject", "Grade"]];
+    for(let key of Object.keys(gradeDataJSON)){
+        gradeDataArray.push([key, `<input disabled value="${gradeDataJSON[key]}">`])
     }
     
     // Display grades 
     message.textContent = "Grades found.";
     output.innerHTML = `<h3 id='studentTag'>Student ${tmp[0] + " " + tmp[1]}</h3>`;
-    const table = makeTable(gradeData);
+    const table = makeTable(gradeDataArray, null, ["subject", "gradeEntry"]);
     output.append(table);
     
+    // Change grade button
     const changeGradeButton = document.createElement("button");
     changeGradeButton.textContent = "Change Grade";
     changeGradeButton.id = "changeGradeBtn";
-    changeGradeButton.onclick = changeGrade;
     output.append(changeGradeButton);
+
+    document.getElementById("changeGradeBtn").addEventListener("click", changeGrade);
 }
 
 
-async function fecthData(name){
-    const response = await fetch(`http://localhost:3000/data/grades/${name}.json`);
+async function fetchData(name){
+    const response = await fetch(`http://${URL}/data/grades/${name}.json`);
     if(response.status === 404){
         return 404;
     }
     const data = await response.json();
     return data;
-}
-
-
-function makeTable(gradeData){
-    const table = document.createElement("table");
-    table.innerHTML = "<tr><th>Subject</th><th>Grade</th></tr>";
-
-    for(let key of Object.keys(gradeData)){
-        table.innerHTML += `<tr><td class='subject'>${key}</td><td class='gradeEntry'><input disabled value='${gradeData[key]}'></td></tr>`;
-    }
-    return table;
 }
 
 
@@ -83,7 +86,8 @@ function changeGrade(){
         element.removeAttribute("disabled");
     });
     changeGradeButton.textContent = "Submit";
-    changeGradeButton.onclick = submitGrade;
+    changeGradeButton.removeEventListener("click", changeGrade);
+    changeGradeButton.addEventListener("click", submitGrade);
 }
 
 
@@ -122,16 +126,22 @@ function submitGrade(){
     gradeString = JSON.parse(gradeString);
 
     // Send data to server
-    fetch(`http://localhost:3000/data/grades/${name}`, {
+    fetch(`http://${URL}/data/grades/${name}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(gradeString)
-    });
-
-    // Change button stuff
-    changeGradeButton.textContent = "Change Grade";
-    changeGradeButton.onclick = changeGrade;
-    document.querySelectorAll(".gradeEntry input").forEach(element => {
-        element.setAttribute("disabled", "");
+    }).then(async repsonse => {
+        if(await repsonse.text() === "good"){
+            // Change button stuff
+            changeGradeButton.textContent = "Change Grade";
+            changeGradeButton.removeEventListener("click", submitGrade);
+            changeGradeButton.addEventListener("click", changeGrade);
+            document.querySelectorAll(".gradeEntry input").forEach(element => {
+            element.setAttribute("disabled", "");
+            });
+        }
+        else{
+            window.alert("Grade submission was invalid. Refresh and try again.")
+        }
     });
 }

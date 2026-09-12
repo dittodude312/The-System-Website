@@ -44,6 +44,9 @@ router.get("/supplies.html", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "views", "supplies.html"));
 })
 
+router.get("/xmans.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "views", "xmans.html"));
+})
 
 
 

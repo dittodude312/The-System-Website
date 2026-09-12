@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to The System</title>
-
     <style>
         *{
             box-sizing: border-box;
@@ -18,7 +17,7 @@
             background-color: antiquewhite;
         }
         main{
-            background-color: rgb(133, 133, 133);
+            background-color: hsl(0, 1%, 79%);
             border: 2px dotted black;
             border-radius: 10px;
             height: 75%;
@@ -36,7 +35,7 @@
             cursor: default;
         }
         main div{
-            background-color: slategrey;
+            background-color: rgb(167, 198, 229);
             padding: 20px;
             width: 80%;
             height: 100%;
@@ -44,7 +43,7 @@
             border-radius: 15px;
             display: flex;
             flex-direction: column;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         main div label{
             font-family: Helvetica, Arial;
@@ -111,14 +110,6 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            /*const data = await load("../data/users.json");
-
-            if(data[username] === password){
-                sessionStorage.setItem("username", username);
-                window.location.replace("index.html");
-            }*/
-
-            
             const response = await fetch('http://localhost:3000/login.html', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
