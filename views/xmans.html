@@ -20,7 +20,42 @@
     </nav>
     <main>
         <h2>View X-Mans</h2>
-        <div class="container" id="tableContainer"></div>
+        <div class="container" id="tableContainer">
+            <h3>X-Mans</h3>
+        </div>
+        <hr>
+        <h2>View Mission Hours</h2>
+        <div class="inputContainer">
+            <label>Date:</label>
+            <select id="month">
+                <option>January</option>
+                <option>February</option>
+                <option>March</option>
+                <option>April</option>
+                <option>May</option>
+                <option>June</option>
+                <option>July</option>
+                <option>August</option>
+                <option>September</option>
+                <option>October</option>
+                <option>November</option>
+                <option>December</option>
+            </select>
+            <input type="number" value="2026" id="year">
+            <button id="hourSubmit">Enter</button>
+        </div>
+        <hr width="90%">
+        <div class="container" id="hourOutput">
+            <h3>No data</h3>
+            Enter month and year to view mission log.
+        </div>
+        <h3 style="text-align: center;" id="message">Waiting</h3>
+        <hr>
+        <h2>Log Missions</h2>
+        <div class="container">
+            <a><h3>Submit request for single mission's hours</h3></a>
+            Admin will review request and approve hours to be saved.
+        </div>
     </main>
     <footer>
         <h4>footer</h4>

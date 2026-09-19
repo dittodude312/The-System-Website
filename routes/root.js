@@ -3,17 +3,13 @@ const path = require("path");
 const fs = require("fs/promises");
 const router = express.Router();
 
-async function loginData(){
-    data = await fs.readFile(path.join(__dirname, "..", "data", "users.json"), "utf-8");
-    return JSON.parse(data);
-}
 
 router.get("/login.html", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "views", "login.html"));
 })
-
 router.post("/login.html", async (req, res) => {
-    const data = await loginData();
+    const rawData = await fs.readFile(path.join(__dirname, "..", "data", "users.json"), "utf-8");
+    const data = JSON.parse(rawData);
     const body = req.body;
 
     if(data[body.username] != body.password){

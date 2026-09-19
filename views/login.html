@@ -83,34 +83,31 @@
             <br>
             <label>Password:</label><br>
             <input type="password" id="password">
-            <button onclick="submit()">SUBMIT</button>
+            <button id="submit">SUBMIT</button>
             <a>Forgot password?</a>
         </div>
     </main>
-    <script>
-        document.getElementById("username").addEventListener("keypress", (event) => {
+    <script type="module">
+        import { URL } from "./scripts/utilities.js";
+
+        document.getElementById("username").addEventListener("keypress", event => {
             if(event.key === "Enter"){
                 document.getElementById("password").focus();
             }
         })
-        document.getElementById("password").addEventListener("keypress", (event) => {
+        document.getElementById("password").addEventListener("keypress", event => {
             if(event.key === "Enter"){
                 submit();
             }
         })
+        document.getElementById("submit").addEventListener("click", submit);
 
-        async function load(file){
-            const response = await fetch(file);
-
-            const data = await response.json();
-            return data;
-        }
 
         async function submit(){
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            const response = await fetch('http://localhost:3000/login.html', {
+            const response = await fetch(`http://${URL}/login.html`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({username: username, password: password})

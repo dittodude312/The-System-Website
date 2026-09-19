@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", async event => {
     const data = [];
 
     // Get inventory data
-    const response = await fetch("http://localhost:3000/data/supplies/inventory.csv");
+    const response = await fetch(`http://${URL}/data/supplies/inventory.csv`);
     if(response.status === 404){
         container.textContent = "An error occurred fetching inventory data.";
         return null;
@@ -31,6 +31,12 @@ window.addEventListener("DOMContentLoaded", async event => {
 
 document.getElementById("submit").addEventListener("click", submitRequest);
 
+
+document.getElementById("quantity").addEventListener("keypress", event => {
+    if(event.key === "Enter"){
+        submitRequest();
+    }
+})
 
 function submitRequest(){
     const supplyName = document.getElementById("selection").value;

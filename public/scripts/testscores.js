@@ -1,4 +1,4 @@
-import { makeTable, URL } from "./utilities.js"
+import { makeTable, parseCSV, URL } from "./utilities.js"
 
 
 document.getElementById("entry").addEventListener("keypress", event => {
@@ -91,15 +91,13 @@ function addListeners(){
                 output.removeChild(document.getElementById("scoreTable"));
             }
             output.append(makeTable(scoreData, "scoreTable"));
-            document.getElementById("message").textContent = "Scores found";
+            document.getElementById("message").textContent = "Scores found.";
         })
     })
 }
 
 
 async function fetchScores(id){
-    const data = [];
-
     const year = id.slice(0, 4);
     const type = id.slice(4);
 
@@ -109,9 +107,7 @@ async function fetchScores(id){
         return 404;
     }
     const text = await response.text();
-    for(let row of text.split("\r\n")){
-        data.push(row.split(","));
-    }
+    const data = parseCSV(text);
     return data;
 }
 

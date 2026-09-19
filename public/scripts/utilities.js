@@ -1,4 +1,7 @@
-export const URL = "localhost:3000";
+const ip = "127.0.0.1";
+const port = "3000";
+
+export const URL = `${ip}:${port}`;
 
 
 export function makeTable(data, id=null, columnClasses=null){
@@ -28,4 +31,12 @@ export function makeTable(data, id=null, columnClasses=null){
     }
 
     return table;
+}
+
+export function parseCSV(text){
+    const data = [];
+    for(let line of text.split("\r\n")){
+        data.push(line.split(","));
+    }
+    return data;
 }
